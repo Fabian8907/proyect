@@ -1,33 +1,15 @@
-#from django.test import TestCase
-from apl.models import *
-from config.wsgi import *
-from pathlib import Path
-import sys
-sys.path.append(str(Path(__file__).parent.parent))
+from django.test import TestCase
+# Importa tus modelos solo si los vas a usar DENTRO de las clases de prueba
+from apl.models import Categoria 
 
-# listar
-#consulta = Categoria.objects.all()
-#print(consulta)
-
-# insertar
-
-#c = Categoria(nombre = 'frijol').save()
-#consulta = Categoria.objects.all()
-#print(consulta)
-
-#Editar
-#c = Categoria.objects.get(id=1)
-#c.nombre = 'cocacola'
-#c.save()
-#print(c.nombre)
-
-# Eliminar
-
-#c = Categoria.objects.get(id=1)
-#c.delete()
-#consulta = Categoria.objects.all()
-#print(consulta)
-
-# filtrado
-for c in Categoria.objects.filter():
-    print(c.nombre)
+class PruebaBasica(TestCase):
+    def test_verificar_entorno(self):
+        """Una prueba simple para validar que CI/CD funciona"""
+        self.assertEqual(1 + 1, 2)
+        
+    def test_crear_categoria(self):
+        """Prueba básica de base de datos en memoria"""
+        # Las consultas e inserciones van DENTRO de las funciones
+        Categoria.objects.create(nombre='Frijol')
+        consulta = Categoria.objects.filter(nombre='Frijol')
+        self.assertTrue(consulta.exists())
