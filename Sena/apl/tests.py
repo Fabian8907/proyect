@@ -1,5 +1,4 @@
 from django.test import TestCase
-# Importa tus modelos solo si los vas a usar DENTRO de las clases de prueba
 from apl.models import Categoria 
 
 class PruebaBasica(TestCase):
